@@ -1,10 +1,12 @@
 import randomize from 'randomatic'
 
-const authorizationKey = randomize('*', 10) // any key is acceptable
+let token = localStorage.token
+if (!token)
+  token = localStorage.token  = randomize('*', 10) // any key is acceptable
 
 const headers = {
   'Accept': 'application/json',
-  'Authorization': authorizationKey
+  'Authorization': token
 }
 
 const api = 'http://localhost:5001'
