@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-class NewPost extends Component {
+class PostForm extends Component {
 
   render(){
     return (
@@ -48,4 +48,4 @@ class NewPost extends Component {
 }
 
 
-export default NewPost;
+export default PostForm;

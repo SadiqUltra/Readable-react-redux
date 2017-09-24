@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import { Route } from 'react-router-dom'
-import { Link } from 'react-router-dom'
+import { Route, Link } from 'react-router-dom'
 import '../App.css';
 
-import NewPost from './NewPost'
+import PostForm from './PostForm'
 import Post from './Post'
 import PostsList from './PostsList'
 import Categories from './Categories'
@@ -16,25 +15,32 @@ class App extends Component {
         <nav className="navbar navbar-default">
           <div className="container">
             <Link className="navbar-brand" to='/'>Home</Link>
-            <Link className="navbar-brand" to='/new'>New Post</Link>
-            <Link className="navbar-brand" to='/categories'>Categories</Link>
+            <Link className="navbar-brand navbar-right" to='/new'>New Post</Link>
           </div>
         </nav>
         <Route exact path='/' render={() => (
-          <PostsList />
+          <div>
+            <Categories />
+            <PostsList />
+          </div>
         )}/>
 
         <Route exact path='/new' render={() => (
-          <NewPost/>
+          <PostForm/>
         )}/>
 
         <Route exact path='/post/:id' render={() => (
           <Post/>
         )}/>
 
-        <Route exact path='/categories' render={() => (
-          <Categories/>
+        <Route exact path='/post/:id/edit' render={() => (
+          <PostForm/>
         )}/>
+
+        <Route exact path='/categories/:id' render={() => (
+          <PostsList/>
+        )}/>
+
       </div>
     );
   }

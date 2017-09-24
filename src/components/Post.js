@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Route, Link } from 'react-router-dom'
 
 class Post extends Component {
 
@@ -6,10 +7,14 @@ class Post extends Component {
     return (
       <div className='container'>
         <h2>Title</h2>
+        <p>Author: <em>Sadiq</em> </p>
+        <p>Published at: 20 OCT 2017</p>
         <p>Body</p>
         <hr/>
         <p className="list-group-item-text">Vote: 20 (UP) (DOWN)</p>
         <hr/>
+
+        <Link to='1/edit' className='btn btn-xs btn-info'>Edit</Link>
 
         <h2>Comments</h2>
         Add a Comment
