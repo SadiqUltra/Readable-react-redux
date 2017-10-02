@@ -7,6 +7,9 @@ import registerServiceWorker from './registerServiceWorker';
 import { createStore, applyMiddleware, compose } from 'redux'
 import reducer from './reducers'
 import { Provider } from 'react-redux'
+import thunkMiddleware from 'redux-thunk'
+
+import { fetchPosts } from './actions/posts'
 
 const logger = store => next => action => {
    console.group(action.type)
@@ -22,10 +25,11 @@ const logger = store => next => action => {
  const store = createStore(
    reducer,
    composeEnhancers(
-     applyMiddleware(logger)
+     applyMiddleware(thunkMiddleware, logger)
    )
  )
 
+store.dispatch(fetchPosts())
 
  ReactDOM.render(
    <Provider store={store} >

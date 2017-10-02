@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Link from 'react-router-dom'
+import { connect } from 'react-redux'
 
 
 class PostsList extends Component {
@@ -19,39 +20,28 @@ class PostsList extends Component {
           </thead>
           <tbody>
 
-            <tr>
-              <td>
-                <h4>New Category</h4>
-                <p>Some word from body readmore</p>
-              </td>
-                <td>
-                  <h4>654</h4>
-                </td>
-                <td>
-                  <h4>20 oct 2017</h4>
-                </td>
-              <td>
-                <button className='btn btn-sm btn-info'>Edit</button>
-                <button className='btn btn-sm btn-danger'>Delete</button>
-              </td>
-            </tr>
+            {this.props.posts.map((post) => {
+              console.log('id', post.id);
+              return (
+                <tr key={post.id}>
+                  <td>
+                    <h4>{post.title}</h4>
+                    <p>{post.body}</p>
+                  </td>
+                    <td>
+                      <h4>654</h4>
+                    </td>
+                    <td>
+                      <h4>{post.timestamp}</h4>
+                    </td>
+                  <td>
+                    <button className='btn btn-sm btn-info'>Edit</button>
+                    <button className='btn btn-sm btn-danger'>Delete</button>
+                  </td>
+                </tr>
+              )
+            })}
 
-            <tr>
-              <td>
-                <h4>New Category</h4>
-                <p>Some word from body readmore</p>
-              </td>
-                <td>
-                  <h4>654</h4>
-                </td>
-                <td>
-                  <h4>20 oct 2017</h4>
-                </td>
-              <td>
-                <button className='btn btn-sm btn-info'>Edit</button>
-                <button className='btn btn-sm btn-danger'>Delete</button>
-              </td>
-            </tr>
 
           </tbody>
         </table>
@@ -60,8 +50,17 @@ class PostsList extends Component {
   }
 }
 
-export default PostsList
+function mapStateToProps ({ posts }) {
+  return {
+    posts: posts.posts,
+    sort: posts
+  }
+}
 
+export default connect(
+  mapStateToProps,
+  undefined
+)(PostsList)
 
 
 // Title author vote
