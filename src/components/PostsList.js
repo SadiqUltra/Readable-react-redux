@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Link from 'react-router-dom'
+import { Route, Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import Timestamp from 'react-timestamp'
 
@@ -26,7 +26,7 @@ class PostsList extends Component {
               return (
                 <tr key={post.id}>
                   <td>
-                    <h4>{post.title}</h4>
+                    <h4><Link to={'/post/'+post.id}>{post.title}</Link></h4>
                     <p>{post.body}</p>
                   </td>
                     <td>
