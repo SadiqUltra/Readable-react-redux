@@ -37,8 +37,11 @@ class App extends Component {
           <PostForm/>
         )}/>
 
-        <Route exact path='/categories/:id' render={() => (
-          <PostsList/>
+        <Route exact path='/categories/:category' render={(props) => (
+          <div>
+            <Categories {...props} category={props.match.params.category} />
+            <PostsList {...props} category={props.match.params.category} />
+          </div>
         )}/>
 
       </div>

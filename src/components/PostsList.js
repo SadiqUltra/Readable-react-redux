@@ -7,6 +7,7 @@ import Timestamp from 'react-timestamp'
 class PostsList extends Component {
 
   render(){
+
     return (
       <div className="container">
         <h2>Posts List</h2>
@@ -21,12 +22,13 @@ class PostsList extends Component {
           </thead>
           <tbody>
 
-            {this.props.posts.map((post) => {
+            {this.props.posts.filter(post => (this.props.category === undefined || post.category === this.props.category))
+              .map((post) => {
               // console.log('id', post.id);
               return (
                 <tr key={post.id}>
                   <td>
-                    <h4><Link to={'/post/'+post.id}>{post.title}</Link></h4>
+                    <h4><Link to={'/post/'+post.id}>{post.title}-{post.category}</Link></h4>
                     <p>{post.body}</p>
                   </td>
                     <td>

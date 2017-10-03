@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { Route, Link } from 'react-router-dom'
 
 class Categories extends Component {
 
@@ -15,11 +16,14 @@ class Categories extends Component {
           <tbody>
             <tr>
               <td>
+                <h4>
                 {this.props.categories.map((category) => {
-                  return (
-                    <button className='btn btn-sm btn-info'>{category.name}</button>
-                  )
+                  if(category.path === this.props.category)
+                    return <Link to={'/categories/'+category.path} className='btn btn-sm btn-info'>{category.name}</Link>
+
+                  return <Link to={'/categories/'+category.path} className='btn btn-sm'>{category.name}</Link>
                 })}
+                </h4>
               </td>
             </tr>
 
