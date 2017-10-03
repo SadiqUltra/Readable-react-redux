@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 
 class Categories extends Component {
 
@@ -8,19 +9,17 @@ class Categories extends Component {
         <table className="table table-hover">
           <thead>
             <tr>
-              <th>Categories Name</th>
-              <th>Actions</th>
+              <th>Categories</th>
             </tr>
           </thead>
           <tbody>
-
             <tr>
-              <td><h4>New Category</h4></td>
               <td>
-                <button className='btn btn-sm btn-info'>Edit</button>
-                <button className='btn btn-sm btn-success'>Save</button>
-                <button className='btn btn-sm btn-warning'>Cancel</button>
-                <button className='btn btn-sm btn-danger'>Delete</button>
+                {this.props.categories.map((category) => {
+                  return (
+                    <button className='btn btn-sm btn-info'>{category.name}</button>
+                  )
+                })}
               </td>
             </tr>
 
@@ -31,4 +30,13 @@ class Categories extends Component {
   }
 }
 
-export default Categories
+function mapStateToProps ({ categories }) {
+  return {
+    categories: categories.categories,
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  undefined
+)(Categories)

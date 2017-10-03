@@ -19,7 +19,6 @@ function posts(state = initalPostState, action){
       return {
         ...state,
         posts: action.posts,
-
       }
     case ADD_POST:
       return {

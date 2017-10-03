@@ -9,7 +9,8 @@ import reducer from './reducers'
 import { Provider } from 'react-redux'
 import thunkMiddleware from 'redux-thunk'
 
-import { fetchPosts } from './actions/posts'
+import { bootPosts } from './actions/posts'
+import { bootCategories } from './actions/categories'
 
 const logger = store => next => action => {
    console.group(action.type)
@@ -29,7 +30,8 @@ const logger = store => next => action => {
    )
  )
 
-store.dispatch(fetchPosts())
+ store.dispatch(bootPosts())
+store.dispatch(bootCategories())
 
  ReactDOM.render(
    <Provider store={store} >

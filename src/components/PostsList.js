@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Link from 'react-router-dom'
 import { connect } from 'react-redux'
+import Timestamp from 'react-timestamp'
 
 
 class PostsList extends Component {
@@ -21,7 +22,7 @@ class PostsList extends Component {
           <tbody>
 
             {this.props.posts.map((post) => {
-              console.log('id', post.id);
+              // console.log('id', post.id);
               return (
                 <tr key={post.id}>
                   <td>
@@ -32,7 +33,7 @@ class PostsList extends Component {
                       <h4>654</h4>
                     </td>
                     <td>
-                      <h4>{post.timestamp}</h4>
+                      <h4><Timestamp time={post.timestamp/1000} format='full' /></h4>
                     </td>
                   <td>
                     <button className='btn btn-sm btn-info'>Edit</button>
