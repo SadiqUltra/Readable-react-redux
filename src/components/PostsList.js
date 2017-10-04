@@ -17,7 +17,7 @@ class PostsList extends Component {
           <thead>
             <tr>
               <th>Post</th>
-
+              <th>Votes</th>
               <th>Published at</th>
               <th>Actions</th>
             </tr>
@@ -31,10 +31,12 @@ class PostsList extends Component {
               return (
                 <tr key={post.id}>
                   <td>
-                    <h4><Link to={'/post/'+post.id}>{post.title}-{post.category}</Link></h4>
+                    <h4><Link to={'/post/'+post.id}>{post.title}</Link></h4>
                     <p>{post.body}</p>
                   </td>
-
+                  <td>
+                    <h4>{post.voteScore}</h4>
+                  </td>
                   <td>
                     <h4><Timestamp time={post.timestamp/1000} format='full' /></h4>
                   </td>
@@ -71,7 +73,3 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(PostsList)
-
-
-// Title author vote
-// 15 character... readmore
