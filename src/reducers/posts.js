@@ -26,8 +26,14 @@ function posts(state = initalPostState, action){
 
       }
     case DELETE_POST:
+      console.log(action);
       return {
         ...state,
+        posts: state.posts.map(post => {
+          if(post.id === action.id)
+            return Object.assign({}, post, {deleted: action.result.ok})
+          return post
+        })
 
       }
     case UPDATE_POST:

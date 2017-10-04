@@ -23,10 +23,11 @@ export function addPost({ post }){
 }
 
 // delete post
-export function deletePost({ post }){
+export function doDeletePost({ json }, id){
   return {
     type: DELETE_POST,
-    post,
+    id,
+    result: json,
   }
 }
 
@@ -37,6 +38,13 @@ export function bootPosts() {
   return function (dispatch) {
 
     return API.fetchPosts().then(json => dispatch(retrievePost(json))
+      )
+  }
+}
+
+export function deletePost(id) {
+  return function (dispatch){
+    return API.deletePost(id).then(json => dispatch(doDeletePost(json, id))
       )
   }
 }
