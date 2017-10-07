@@ -3,7 +3,8 @@ import {
   ADD_POST,
   DELETE_POST,
   UPDATE_POST,
-  CHANGE_SORT
+  CHANGE_SORT,
+  UP_VOTE,
 } from '../actions/posts'
 
 
@@ -46,6 +47,12 @@ function posts(state = initalPostState, action){
       return {
         ...state,
         sortBy: action.sortby
+
+      }
+    case UP_VOTE:
+      return {
+        ...state,
+        posts: state.posts.map( post => post.id === action.id ? ++post.voteScore : post )
 
       }
     default:
