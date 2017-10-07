@@ -29,8 +29,8 @@ class App extends Component {
           <PostForm/>
         )}/>
 
-        <Route exact path='/post/:id' render={() => (
-          <Post/>
+        <Route exact path='/post/:id' render={(props) => (
+          <Post {...props} postId={props.match.params.id} />
         )}/>
 
         <Route exact path='/post/:id/edit' render={() => (

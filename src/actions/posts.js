@@ -48,7 +48,8 @@ export function doUpVote(json, id){
   console.log(json)
     return {
       type: UP_VOTE,
-      id
+      id,
+      post: json
     }
 }
 
@@ -83,7 +84,7 @@ export function deletePost(id) {
 
 
 // up vote
-export function upVOte(id) {
+export function upVote(id) {
   return function (dispatch){
     return API.votePost(id, true).then(json => dispatch(doUpVote(json, id))
       )

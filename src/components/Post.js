@@ -1,23 +1,34 @@
 import React, { Component } from 'react'
 import { Route, Link } from 'react-router-dom'
+import { Redirect } from 'react-router'
 import { connect } from 'react-redux'
-import { deletePost } from './../actions/posts'
+import Timestamp from 'react-timestamp'
+
+import history from './../utils/history'
+import { deletePost, upVote, downVote, fetchComments, updatePost } from './../actions/posts'
 
 class Post extends Component {
 
   render(){
-    return (
+    const  post  = this.props.posts.filter(post => post.id === this.props.postId)[0]
+    if(post === undefined) return (
+      <div className='container'>Loading ...</div>
+    )
+    else return (
       <div className='container'>
-        <h2>Title</h2>
-        <p>Author: <em>Sadiq</em> </p>
-        <p>Published at: 20 OCT 2017</p>
-        <p>Body</p>
+        <h2>{post.title}</h2>
+        <p>Author: <em>{post.author}</em> </p>
+        <p>Published at: <Timestamp time={post.timestamp/1000} format='full' /></p>
+        <p>{post.body}</p>
         <hr/>
-        <p className="list-group-item-text">Vote: 20 (UP) (DOWN)</p>
+        <p className="list-group-item-text">Vote: <span>{post.voteScore} </span>
+          <button className="btn btn-xs btn-success" onClick={() => this.props.upVote(post.id)}>Up</button>
+          <button className="btn btn-xs btn-danger">Down</button>
+        </p>
         <hr/>
 
         <Link to='1/edit' className='btn btn-xs btn-info'>Edit</Link>
-        <button className="btn btn-xs btn-danger">Delete</button>
+        <button className="btn btn-xs btn-danger" onClick={() => this.props.deletePost(post.id)}>Delete</button>
 
         <h2>Comments</h2>
         Add a Comment
@@ -42,7 +53,10 @@ class Post extends Component {
           <div className="list-group-item">
             <h4 className="list-group-item-heading">Name</h4>
             <p className="list-group-item-text">Comment body</p>
-            <p className="list-group-item-text">Vote: 20 (UP) (DOWN)</p>
+            <p className="list-group-item-text">Vote: <span>20 </span>
+              <button className="btn btn-xs btn-success">Up</button>
+              <button className="btn btn-xs btn-danger">Down</button>
+            </p>
           </div>
         </div>
       </div>
@@ -50,15 +64,21 @@ class Post extends Component {
   }
 }
 
-function mapStateToProps ({ post }) {
+function mapStateToProps ({ posts }) {
+  // console.log('ownProps', ownProps.postId);
   return {
-    post: post
+    posts: posts.posts
   }
 }
 
-function mapDispatchToProps (dispatch) {
+function mapDispatchToProps (dispatch, ownProps) {
   return {
-    deletePost: (id) => dispatch(deletePost(id)),
+    deletePost: (id) => {
+      console.log('ownProps.history', ownProps)
+      dispatch(deletePost(id))
+      ownProps.history.push('/');
+    },
+    upVote: (id) => dispatch(upVote(id)),
   }
 }
 

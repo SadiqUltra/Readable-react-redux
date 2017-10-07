@@ -52,7 +52,7 @@ function posts(state = initalPostState, action){
     case UP_VOTE:
       return {
         ...state,
-        posts: state.posts.map( post => post.id === action.id ? ++post.voteScore : post )
+        posts: state.posts.map( post => post.id === action.id ? action.post : post )
 
       }
     default:
