@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 import Timestamp from 'react-timestamp'
 
 import history from './../utils/history'
+import Comment from './Comment'
 import { deletePost, upVote, downVote, fetchComments, updatePost } from './../actions/posts'
 
 class Post extends Component {
@@ -49,16 +50,8 @@ class Post extends Component {
         </fieldset>
         </form>
 
-        <div className="list-group">
-          <div className="list-group-item">
-            <h4 className="list-group-item-heading">Name</h4>
-            <p className="list-group-item-text">Comment body</p>
-            <p className="list-group-item-text">Vote: <span>20 </span>
-              <button className="btn btn-xs btn-success">Up</button>
-              <button className="btn btn-xs btn-danger">Down</button>
-            </p>
-          </div>
-        </div>
+        <Comment />
+
       </div>
     )
   }

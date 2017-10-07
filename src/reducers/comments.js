@@ -4,8 +4,10 @@ import {
   PARENT_DELETED_COMMENT
 } from '../actions/comments'
 
-function comments(){
+const initalCommentState = []
 
+function comments(state = initalCommentState, action){
+  const {parentId, comments} = action
 }
 
 
