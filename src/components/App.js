@@ -15,7 +15,7 @@ class App extends Component {
         <nav className="navbar navbar-default">
           <div className="container">
             <Link className="navbar-brand" to='/'>Home</Link>
-            <Link className="navbar-brand navbar-right" to='/new'>New Post</Link>
+            <Link className="navbar-brand navbar-right" to='/post/new'>New Post</Link>
           </div>
         </nav>
         <Route exact path='/' render={() => (
@@ -25,19 +25,21 @@ class App extends Component {
           </div>
         )}/>
 
-        <Route exact path='/new' render={() => (
+        <Route exact path='/post/new' render={() => (
           <PostForm/>
         )}/>
 
-        <Route exact path='/post/:id' render={(props) => (
+        <Route exact path='/post/:category/:id/edit' render={() => (
+          <PostForm/>
+        )}/>
+
+
+
+        <Route exact path='/post/:category/:id' render={(props) => (
           <Post {...props} postId={props.match.params.id} />
         )}/>
 
-        <Route exact path='/post/:id/edit' render={() => (
-          <PostForm/>
-        )}/>
-
-        <Route exact path='/categories/:category' render={(props) => (
+        <Route exact path='/:category' render={(props) => (
           <div>
             <Categories {...props} category={props.match.params.category} />
             <PostsList {...props} category={props.match.params.category} />

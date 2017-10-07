@@ -10,6 +10,7 @@ import { deletePost, upVote, downVote, fetchComments, updatePost } from './../ac
 
 class Comment extends Component {
   render(){
+    const { comment } = this.props
     return(
       <div className="list-group">
         <div className="list-group-item">
@@ -26,10 +27,9 @@ class Comment extends Component {
 }
 
 
-function mapStateToProps ({ posts }) {
-  // console.log('ownProps', ownProps.postId);
+function mapStateToProps ({ }, ownProps) {
   return {
-    posts: posts.posts
+    comment: ownProps.comment
   }
 }
 

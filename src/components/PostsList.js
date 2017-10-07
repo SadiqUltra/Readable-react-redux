@@ -43,7 +43,7 @@ class PostsList extends Component {
               return (
                 <tr key={post.id}>
                   <td>
-                    <h4><Link to={'/post/'+post.id}>{post.title}</Link></h4>
+                    <h4><Link to={'/post/'+post.category+'/'+post.id}>{post.title}</Link></h4>
                     <p>{post.body}</p>
                   </td>
                   <td>
@@ -53,7 +53,7 @@ class PostsList extends Component {
                     <h4><Timestamp time={post.timestamp/1000} format='full' /></h4>
                   </td>
                   <td>
-                    <Link to={'/post/'+ post.id +'/edit'} className='btn btn-sm btn-info'>Edit</Link>
+                    <Link to={'/post/'+ post.category +'/'+ post.id +'/edit'} className='btn btn-sm btn-info'>Edit</Link>
                     <button className='btn btn-sm btn-danger' onClick={() => this.props.deletePost(post.id)}>Delete</button>
                   </td>
                 </tr>
