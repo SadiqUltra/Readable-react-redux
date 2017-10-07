@@ -23,7 +23,7 @@ class Post extends Component {
         <hr/>
         <p className="list-group-item-text">Vote: <span>{post.voteScore} </span>
           <button className="btn btn-xs btn-success" onClick={() => this.props.upVote(post.id)}>Up</button>
-          <button className="btn btn-xs btn-danger">Down</button>
+          <button className="btn btn-xs btn-danger" onClick={() => this.props.downVote(post.id)}>Down</button>
         </p>
         <hr/>
 
@@ -79,6 +79,7 @@ function mapDispatchToProps (dispatch, ownProps) {
       ownProps.history.push('/');
     },
     upVote: (id) => dispatch(upVote(id)),
+    downVote: (id) => dispatch(downVote(id)),
   }
 }
 

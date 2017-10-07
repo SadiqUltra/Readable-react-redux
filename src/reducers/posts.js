@@ -5,6 +5,7 @@ import {
   UPDATE_POST,
   CHANGE_SORT,
   UP_VOTE,
+  DOWN_VOTE,
 } from '../actions/posts'
 
 
@@ -50,6 +51,12 @@ function posts(state = initalPostState, action){
 
       }
     case UP_VOTE:
+      return {
+        ...state,
+        posts: state.posts.map( post => post.id === action.id ? action.post : post )
+
+      }
+    case DOWN_VOTE:
       return {
         ...state,
         posts: state.posts.map( post => post.id === action.id ? action.post : post )
