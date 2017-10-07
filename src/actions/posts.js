@@ -44,7 +44,8 @@ export function changeSort(sortby){
 
 
 // up vote
-export function upVote(id){
+export function doUpVote(json, id){
+  console.log(json)
     return {
       type: UP_VOTE,
       id
@@ -53,7 +54,7 @@ export function upVote(id){
 
 
 // down vote
-export function downVote(id){
+export function doDownVote(id){
     return {
       type: DOWN_VOTE,
       id
@@ -72,9 +73,19 @@ export function bootPosts() {
   }
 }
 
+// delete post
 export function deletePost(id) {
   return function (dispatch){
     return API.deletePost(id).then(json => dispatch(doDeletePost(json, id))
+      )
+  }
+}
+
+
+// up vote
+export function upVOte(id) {
+  return function (dispatch){
+    return API.votePost(id, true).then(json => dispatch(doUpVote(json, id))
       )
   }
 }
