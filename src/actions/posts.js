@@ -5,6 +5,7 @@ export const ADD_POST = 'ADD_POST'
 export const DELETE_POST = 'DELETE_POST'
 export const UPDATE_POST = 'UPDATE_POST'
 export const CHANGE_SORT = 'CHANGE_SORT'
+export const UP_VOTE = 'UP_VOTE'
 
 // get all posts
 function retrievePost(json) {
@@ -32,12 +33,25 @@ export function doDeletePost({ json }, id){
   }
 }
 
+// change sorting
 export function changeSort(sortby){
   return {
     type: CHANGE_SORT,
     sortby: sortby
   }
 }
+
+
+// up vote
+export function upVote(id){
+    return {
+      type: UP_VOTE,
+      id
+    }
+}
+
+
+
 
 // all post
 export function bootPosts() {
