@@ -6,6 +6,7 @@ export const DELETE_POST = 'DELETE_POST'
 export const UPDATE_POST = 'UPDATE_POST'
 export const CHANGE_SORT = 'CHANGE_SORT'
 export const UP_VOTE = 'UP_VOTE'
+export const DOWN_VOTE = 'DOWN_VOTE'
 
 // get all posts
 function retrievePost(json) {
@@ -50,6 +51,14 @@ export function upVote(id){
     }
 }
 
+
+// down vote
+export function downVote(id){
+    return {
+      type: DOWN_VOTE,
+      id
+    }
+}
 
 
 
