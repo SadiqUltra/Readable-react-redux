@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import { Route, Link } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { deletePost } from './../actions/posts'
 
 class Post extends Component {
 
@@ -15,6 +17,7 @@ class Post extends Component {
         <hr/>
 
         <Link to='1/edit' className='btn btn-xs btn-info'>Edit</Link>
+        <button className="btn btn-xs btn-danger">Delete</button>
 
         <h2>Comments</h2>
         Add a Comment
@@ -47,20 +50,19 @@ class Post extends Component {
   }
 }
 
-export default Post
+function mapStateToProps ({ post }) {
+  return {
+    post: post
+  }
+}
 
-// tile
-//
-// body
-//
-// cateroy
-//
-// vote
-//
-// Add comment
-//
-// commments
-//   time
-//   vote
-//   author
-//   body
+function mapDispatchToProps (dispatch) {
+  return {
+    deletePost: (id) => dispatch(deletePost(id)),
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Post)

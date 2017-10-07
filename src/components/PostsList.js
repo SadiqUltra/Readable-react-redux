@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 import { Route, Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import Timestamp from 'react-timestamp'
-
-import { deletePost } from './../actions/posts'
+import sortBy from 'sort-by'
+import { deletePost, changeSort } from './../actions/posts'
 
 
 class PostsList extends Component {
@@ -13,6 +13,17 @@ class PostsList extends Component {
     return (
       <div className="container">
         <h2>Posts List</h2>
+        <div className="form-group">
+          <label className="col-md-4 control-label">Sort by</label>
+          <div className="col-md-4">
+            <select id="categories" name="categories" className="form-control" onChange={event => this.props.changeSort(event.target.value)}>
+              <option value="-voteScore">Maximum Votes</option>
+              <option value="voteScore">Minimum Votes</option>
+              <option value="timestamp">Published at</option>
+              <option value="-timestamp">Reverse Published at</option>
+            </select>
+          </div>
+        </div>
         <table className="table table-hover">
           <thead>
             <tr>
@@ -24,9 +35,10 @@ class PostsList extends Component {
           </thead>
           <tbody>
 
-            {this.props.posts.filter(post => (this.props.category === undefined || post.category === this.props.category))
+            {this.props.posts
+              .filter(post => ((this.props.category === undefined || post.category === this.props.category) && (post.deleted === false)))
+              .sort(sortBy(this.props.sortBy))
               .map((post) => {
-                if(post.deleted !== false) return
               // console.log('id', post.id);
               return (
                 <tr key={post.id}>
@@ -41,7 +53,7 @@ class PostsList extends Component {
                     <h4><Timestamp time={post.timestamp/1000} format='full' /></h4>
                   </td>
                   <td>
-                    <button className='btn btn-sm btn-info'>Edit</button>
+                    <Link to={'/post/'+ post.id +'/edit'} className='btn btn-sm btn-info'>Edit</Link>
                     <button className='btn btn-sm btn-danger' onClick={() => this.props.deletePost(post.id)}>Delete</button>
                   </td>
                 </tr>
@@ -59,13 +71,14 @@ class PostsList extends Component {
 function mapStateToProps ({ posts }) {
   return {
     posts: posts.posts,
-    sort: posts
+    sortBy: posts.sortBy,
   }
 }
 
 function mapDispatchToProps (dispatch) {
   return {
     deletePost: (id) => dispatch(deletePost(id)),
+    changeSort: (sortByValue) => dispatch(changeSort(sortByValue))
   }
 }
 

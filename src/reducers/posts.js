@@ -2,15 +2,16 @@ import {
   RETRIEVE_POST,
   ADD_POST,
   DELETE_POST,
-  UPDATE_POST
+  UPDATE_POST,
+  CHANGE_SORT
 } from '../actions/posts'
 
 
 const initalPostState = {
   posts: [],
   comments:[],
-  sortCategory: 'voteScore',
-  sortOrder: 'asc'
+  sortBy: '-voteScore',
+  // sortOrder: '-'
 }
 
 function posts(state = initalPostState, action){
@@ -41,7 +42,12 @@ function posts(state = initalPostState, action){
         ...state,
 
       }
-      // break;
+    case CHANGE_SORT:
+      return {
+        ...state,
+        sortBy: action.sortby
+
+      }
     default:
       return state
   }
