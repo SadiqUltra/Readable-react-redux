@@ -62,6 +62,8 @@ class PostForm extends Component {
         <label className="col-md-4 control-label"></label>
         <div className="col-md-4">
           <button className="btn btn-info">submit</button>
+          <Link to={'/'} className='btn btn-danger pull-right'>Cancel</Link>
+
         </div>
         </div>
 
