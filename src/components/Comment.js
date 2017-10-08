@@ -6,7 +6,7 @@ import Timestamp from 'react-timestamp'
 
 import history from './../utils/history'
 // add comments action
-import { deletePost, upVote, downVote, fetchComments, updatePost } from './../actions/posts'
+import { deleteComment, upVote, downVote, updateComment } from './../actions/comments'
 
 class Comment extends Component {
   render(){
@@ -14,18 +14,18 @@ class Comment extends Component {
     return(
       <div className="list-group">
         <div className="list-group-item">
-          <h4 className="list-group-item-heading">Name</h4>
-          <p className="list-group-item-text">Comment body</p>
+          <h4 className="list-group-item-heading">{comment.author}</h4>
+          <p className="list-group-item-text">{comment.body}</p>
 
           <p>
-            <textarea className="form-control" id="body" name="body"> </textarea>
+            <textarea className="form-control" id="body" name="body" defaultValue={comment.body} />
           </p>
           <p>
             <button className="btn btn-xs btn-success">Update</button>
             <button className="btn btn-xs btn-danger">Cancel</button>
           </p>
 
-          <p className="list-group-item-text">Vote: <span>20 </span>
+          <p className="list-group-item-text">Vote: <span>{comment.voteScore} </span>
             <button className="btn btn-xs btn-success">Up</button>
             <button className="btn btn-xs btn-danger">Down</button>
           </p>
@@ -51,6 +51,8 @@ function mapDispatchToProps (dispatch, ownProps) {
 
     upVote: (id) => dispatch(upVote(id)),
     downVote: (id) => dispatch(downVote(id)),
+    deleteComment: (id) => dispatch(deleteComment(id)),
+    updateComment: (comment) => dispatch(downVote(comment)),
   }
 }
 
