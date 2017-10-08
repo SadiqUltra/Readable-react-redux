@@ -1,4 +1,5 @@
 import * as API from './../utils/api'
+import uuidv1 from 'uuid'
 
 export const RETRIEVE_POST = 'RETRIEVE_POST'
 export const ADD_POST = 'ADD_POST'
@@ -18,7 +19,7 @@ function retrievePost(json) {
 
 
 // create new post
-export function addPost({ post }){
+export function doAddPost({ post }){
   return {
     type: ADD_POST,
     post,
@@ -95,6 +96,16 @@ export function upVote(id) {
 export function downVote(id) {
   return function (dispatch){
     return API.votePost(id, false).then(json => dispatch(doDownVote(json, id))
+      )
+  }
+}
+
+// add post
+export function addPost(post) {
+  post.id = uuidv1()
+  post.timestamp = Date.now()
+  return function (dispatch){
+    return API.createPost(post).then(json => dispatch(doAddPost(json))
       )
   }
 }
