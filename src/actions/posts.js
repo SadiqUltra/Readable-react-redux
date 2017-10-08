@@ -26,6 +26,15 @@ export function doAddPost(post){
   }
 }
 
+// update post
+export function doUpdatePost(post){
+  return {
+    type: ADD_POST,
+    post,
+  }
+}
+
+
 // delete post
 export function doDeletePost({ json }, id){
   return {
@@ -107,6 +116,14 @@ export function addPost(post) {
   post.deleted = false
   return function (dispatch){
     return API.createPost(post).then(json => dispatch(doAddPost(json))
+      )
+  }
+}
+
+// update Post
+export function updatePost(post) {
+  return function (dispatch){
+    return API.updatePost(post).then(json => dispatch(doAddPost(json))
       )
   }
 }
