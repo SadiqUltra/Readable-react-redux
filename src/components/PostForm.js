@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { Route, Link } from 'react-router-dom'
 
 class PostForm extends Component {
 
@@ -21,8 +23,7 @@ class PostForm extends Component {
         <label className="col-md-4 control-label" for="categories">Categories</label>
         <div className="col-md-4">
           <select id="categories" name="categories" className="form-control">
-            <option value="1">Option one</option>
-            <option value="2">Option two</option>
+            {this.props.categories.map(category => <option value={category.path}>{category.name}</option> )}
           </select>
         </div>
         </div>
@@ -30,7 +31,7 @@ class PostForm extends Component {
         <div className="form-group">
         <label className="col-md-4 control-label" for="body">Body</label>
         <div className="col-md-4">
-          <textarea className="form-control" id="body" name="body">Post Body</textarea>
+          <textarea className="form-control" id="body" name="body"> </textarea>
         </div>
         </div>
 
@@ -47,5 +48,13 @@ class PostForm extends Component {
   }
 }
 
+function mapStateToProps ({ categories }) {
+  return {
+    categories: categories.categories,
+  }
+}
 
-export default PostForm;
+export default connect(
+  mapStateToProps,
+  undefined
+)(PostForm)
