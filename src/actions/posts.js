@@ -29,7 +29,7 @@ export function doAddPost(post){
 // update post
 export function doUpdatePost(post){
   return {
-    type: ADD_POST,
+    type: UPDATE_POST,
     post,
   }
 }
@@ -123,7 +123,7 @@ export function addPost(post) {
 // update Post
 export function updatePost(post) {
   return function (dispatch){
-    return API.updatePost(post).then(json => dispatch(doAddPost(json))
+    return API.updatePost(post).then(json => dispatch(doUpdatePost(json))
       )
   }
 }

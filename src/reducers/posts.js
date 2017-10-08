@@ -42,6 +42,11 @@ function posts(state = initalPostState, action){
     case UPDATE_POST:
       return {
         ...state,
+        posts: state.posts.map(post => {
+          if(post.id === action.post.id)
+            return action.post
+          return post
+        })
 
       }
     case CHANGE_SORT:

@@ -3,6 +3,7 @@ import { Route, Link } from 'react-router-dom'
 import '../App.css';
 
 import PostForm from './PostForm'
+import EditPost from './EditPost'
 import Post from './Post'
 import PostsList from './PostsList'
 import Categories from './Categories'
@@ -30,7 +31,7 @@ class App extends Component {
         )}/>
 
         <Route exact path='/post/:category/:id/edit' render={(props) => (
-          <PostForm {...props}/>
+          <EditPost {...props} postId={props.match.params.id} />
         )}/>
 
 

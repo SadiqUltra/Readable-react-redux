@@ -45,7 +45,7 @@ class PostForm extends Component {
         <div className="form-group">
         <label className="col-md-4 control-label">Categories</label>
         <div className="col-md-4">
-          <select id="categories" name="categories" className="form-control">
+          <select id="categories" name="category" className="form-control">
             {this.props.categories.map(category => <option key={category.path} value={category.path}>{category.name}</option> )}
           </select>
         </div>

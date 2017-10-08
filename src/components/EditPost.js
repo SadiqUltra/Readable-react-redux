@@ -5,23 +5,35 @@ import { connect } from 'react-redux'
 import serializeForm from 'form-serialize'
 
 import history from './../utils/history'
-import { addPost } from './../actions/posts'
+import { updatePost } from './../actions/posts'
 
 class EditPost extends Component {
 
   handleSubmit = (e) => {
         e.preventDefault()
         const post = serializeForm(e.target, { hash: true })
-        this.props.createPost(post)
+        console.log(post)
+        post.timestamp = Number(post.timestamp)
+        post.deleted = post.deleted == 1 ? true: false
+        post.voteScore = Number(post.voteScore)
+        this.props.updatePost(post)
         this.props.history.push('/')
 
   }
 
   render(){
+    const  post  = this.props.posts.filter(post => post.id === this.props.postId)[0]
+    if(post === undefined) return (
+      <div className='container'>Loading ...</div>
+    )
     return (
       <div className='container'>
 
       <form onSubmit={this.handleSubmit} className="form-horizontal">
+      <input type="hidden" name="id" defaultValue={post.id} />
+      <input type="hidden" name="deleted" defaultValue={Number(post.deleted)} />
+      <input type="hidden" name="timestamp" defaultValue={post.timestamp} />
+      <input type="hidden" name="voteScore" defaultValue={post.voteScore} />
       <fieldset>
 
         <legend>Edit Post</legend>
@@ -29,7 +41,7 @@ class EditPost extends Component {
         <div className="form-group">
           <label className="col-md-4 control-label">Title</label>
           <div className="col-md-4">
-          <input id="title" name="title" type="text" placeholder="Post Title" className="form-control input-md" defaultValue="A Title"/>
+          <input id="title" name="title" type="text" placeholder="Post Title" className="form-control input-md" defaultValue={post.title}/>
 
         </div>
         </div>
@@ -37,7 +49,7 @@ class EditPost extends Component {
         <div className="form-group">
           <label className="col-md-4 control-label">Author</label>
           <div className="col-md-4">
-          <input id="author" name="author" type="text" placeholder="Sadiq" className="form-control input-md" defaultValue="Sadiq"/>
+          <input id="author" name="author" type="text" placeholder="Sadiq" className="form-control input-md" defaultValue={post.author}/>
 
         </div>
         </div>
@@ -45,7 +57,7 @@ class EditPost extends Component {
         <div className="form-group">
         <label className="col-md-4 control-label">Categories</label>
         <div className="col-md-4">
-          <select id="categories" name="categories" className="form-control">
+          <select id="categories" name="category" className="form-control" defaultValue={post.category}>
             {this.props.categories.map(category => <option key={category.path} value={category.path}>{category.name}</option> )}
           </select>
         </div>
@@ -54,7 +66,7 @@ class EditPost extends Component {
         <div className="form-group">
         <label className="col-md-4 control-label">Body</label>
         <div className="col-md-4">
-          <textarea className="form-control" id="body" name="body"  defaultValue="This is an example .." />
+          <textarea className="form-control" id="body" name="body"  defaultValue={post.body} />
         </div>
         </div>
 
@@ -81,9 +93,9 @@ function mapStateToProps ({ categories, posts }) {
 
 function mapDispatchToProps (dispatch) {
   return {
-    createPost: (post) => {
+    updatePost: (post) => {
 
-      dispatch(addPost(post))
+      dispatch(updatePost(post))
     },
   }
 }
