@@ -25,12 +25,12 @@ class App extends Component {
           </div>
         )}/>
 
-        <Route exact path='/post/new' render={() => (
-          <PostForm/>
+        <Route exact path='/post/new' render={(props) => (
+          <PostForm {...props}/>
         )}/>
 
-        <Route exact path='/post/:category/:id/edit' render={() => (
-          <PostForm/>
+        <Route exact path='/post/:category/:id/edit' render={(props) => (
+          <PostForm {...props}/>
         )}/>
 
 

@@ -67,9 +67,9 @@ function mapStateToProps ({ posts }) {
 function mapDispatchToProps (dispatch, ownProps) {
   return {
     deletePost: (id) => {
-      console.log('ownProps.history', ownProps)
+      // console.log('ownProps.history', ownProps)
       dispatch(deletePost(id))
-      ownProps.history.push('/');
+      ownProps.history.push('/')
     },
     upVote: (id) => dispatch(upVote(id)),
     downVote: (id) => dispatch(downVote(id)),

@@ -1,49 +1,73 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
 import { Route, Link } from 'react-router-dom'
+import { Redirect } from 'react-router'
+import { connect } from 'react-redux'
+import serializeForm from 'form-serialize'
+
+import history from './../utils/history'
+import { addPost } from './../actions/posts'
 
 class PostForm extends Component {
 
+  handleSubmit = (e) => {
+        e.preventDefault()
+        const post = serializeForm(e.target, { hash: true })
+        this.props.createPost(post)
+        this.props.history.push('/')
+
+  }
+
   render(){
     return (
-      <form className="form-horizontal">
+      <div className='container'>
+
+      <form onSubmit={this.handleSubmit} className="form-horizontal">
       <fieldset>
 
         <legend>Create New Post</legend>
 
         <div className="form-group">
-          <label className="col-md-4 control-label" for="textinput">Title</label>
+          <label className="col-md-4 control-label">Title</label>
           <div className="col-md-4">
-          <input id="textinput" name="textinput" type="text" placeholder="Post Title" className="form-control input-md"/>
+          <input id="title" name="title" type="text" placeholder="Post Title" className="form-control input-md" defaultValue="A Title"/>
 
         </div>
         </div>
 
         <div className="form-group">
-        <label className="col-md-4 control-label" for="categories">Categories</label>
+          <label className="col-md-4 control-label">Author</label>
+          <div className="col-md-4">
+          <input id="author" name="author" type="text" placeholder="Sadiq" className="form-control input-md" defaultValue="Sadiq"/>
+
+        </div>
+        </div>
+
+        <div className="form-group">
+        <label className="col-md-4 control-label">Categories</label>
         <div className="col-md-4">
           <select id="categories" name="categories" className="form-control">
-            {this.props.categories.map(category => <option value={category.path}>{category.name}</option> )}
+            {this.props.categories.map(category => <option key={category.path} value={category.path}>{category.name}</option> )}
           </select>
         </div>
         </div>
 
         <div className="form-group">
-        <label className="col-md-4 control-label" for="body">Body</label>
+        <label className="col-md-4 control-label">Body</label>
         <div className="col-md-4">
-          <textarea className="form-control" id="body" name="body"> </textarea>
+          <textarea className="form-control" id="body" name="body"  defaultValue="This is an example .." />
         </div>
         </div>
 
         <div className="form-group">
-        <label className="col-md-4 control-label" for="submit"></label>
+        <label className="col-md-4 control-label"></label>
         <div className="col-md-4">
-          <button id="submit" name="submit" className="btn btn-info">submit</button>
+          <button className="btn btn-info">submit</button>
         </div>
         </div>
 
         </fieldset>
         </form>
+        </div>
     )
   }
 }
@@ -54,7 +78,16 @@ function mapStateToProps ({ categories }) {
   }
 }
 
+function mapDispatchToProps (dispatch) {
+  return {
+    createPost: (post) => {
+
+      dispatch(addPost(post))
+    },
+  }
+}
+
 export default connect(
   mapStateToProps,
-  undefined
+  mapDispatchToProps
 )(PostForm)

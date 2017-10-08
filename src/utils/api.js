@@ -17,14 +17,14 @@ export const fetchPosts = () =>
   fetch(`${api}/posts`, { headers })
     .then(res => res.json())
 
-export const createPost = (body) =>
+export const createPost = (post) =>
   fetch(`${api}/posts`, {
     method: 'POST',
     headers: {
       ...headers,
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify(body)
+    body: JSON.stringify(post)
   }).then(res => res.json())
 
 

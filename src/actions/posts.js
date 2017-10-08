@@ -19,7 +19,7 @@ function retrievePost(json) {
 
 
 // create new post
-export function doAddPost({ post }){
+export function doAddPost(post){
   return {
     type: ADD_POST,
     post,
@@ -104,6 +104,7 @@ export function downVote(id) {
 export function addPost(post) {
   post.id = uuidv1()
   post.timestamp = Date.now()
+  post.deleted = false
   return function (dispatch){
     return API.createPost(post).then(json => dispatch(doAddPost(json))
       )

@@ -26,7 +26,7 @@ function posts(state = initalPostState, action){
     case ADD_POST:
       return {
         ...state,
-
+        posts: state.posts.concat(action.post)
       }
     case DELETE_POST:
       console.log(action);
