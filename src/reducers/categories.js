@@ -5,13 +5,13 @@ import {
   UPDATE_CATEGORY
 } from '../actions/categories'
 
-const initalPostState = {
+const initalCategoryState = {
   categories: []
 }
 
 
 
-function categories(state = initalPostState, action){
+function categories(state = initalCategoryState, action){
   switch (action.type) {
     case RETRIEVE_CATEGORY:
       return {
