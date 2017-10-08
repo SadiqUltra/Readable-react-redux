@@ -79,16 +79,15 @@ export function bootPosts() {
 
   return function (dispatch) {
 
-    return API.fetchPosts().then(json => dispatch(retrievePost(json))
-      )
+    return API.fetchPosts()
+      .then(json => dispatch(retrievePost(json)) )
   }
 }
 
 // delete post
 export function deletePost(id) {
   return function (dispatch){
-    return API.deletePost(id).then(json => dispatch(doDeletePost(json, id))
-      )
+    return API.deletePost(id).then(json => dispatch(doDeletePost(json, id)) )
   }
 }
 
@@ -96,16 +95,14 @@ export function deletePost(id) {
 // up vote
 export function upVote(id) {
   return function (dispatch){
-    return API.votePost(id, true).then(json => dispatch(doUpVote(json, id))
-      )
+    return API.votePost(id, true).then(json => dispatch(doUpVote(json, id)) )
   }
 }
 
 // down vote
 export function downVote(id) {
   return function (dispatch){
-    return API.votePost(id, false).then(json => dispatch(doDownVote(json, id))
-      )
+    return API.votePost(id, false).then(json => dispatch(doDownVote(json, id)) )
   }
 }
 
@@ -115,15 +112,13 @@ export function addPost(post) {
   post.timestamp = Date.now()
   post.deleted = false
   return function (dispatch){
-    return API.createPost(post).then(json => dispatch(doAddPost(json))
-      )
+    return API.createPost(post).then(json => dispatch(doAddPost(json)) )
   }
 }
 
 // update Post
 export function updatePost(post) {
   return function (dispatch){
-    return API.updatePost(post).then(json => dispatch(doUpdatePost(json))
-      )
+    return API.updatePost(post).then(json => dispatch(doUpdatePost(json)) )
   }
 }

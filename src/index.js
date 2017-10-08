@@ -10,6 +10,7 @@ import { Provider } from 'react-redux'
 import thunkMiddleware from 'redux-thunk'
 
 import { bootPosts } from './actions/posts'
+import { fetchComments } from './actions/comments'
 import { bootCategories } from './actions/categories'
 
 const logger = store => next => action => {
@@ -30,7 +31,8 @@ const logger = store => next => action => {
    )
  )
 
- store.dispatch(bootPosts())
+store.dispatch(bootPosts())
+// store.dispatch(fetchComments('6ni6ok3ym7mf1p33lnez'))
 store.dispatch(bootCategories())
 
  ReactDOM.render(

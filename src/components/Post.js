@@ -6,16 +6,23 @@ import Timestamp from 'react-timestamp'
 
 import history from './../utils/history'
 import Comment from './Comment'
-import { deletePost, upVote, downVote, fetchComments, updatePost } from './../actions/posts'
+import { deletePost, upVote, downVote, updatePost } from './../actions/posts'
+import { fetchComments } from './../actions/comments'
 
 class Post extends Component {
+
+  componentDidMount(){
+    const comments = this.props.getComments(this.props.postId)
+  }
 
   render(){
     const  post  = this.props.posts.filter(post => post.id === this.props.postId)[0]
     if(post === undefined) return (
       <div className='container'>Loading ...</div>
     )
-    else return (
+    else {
+
+      return (
       <div className='container'>
         <h2>{post.title}</h2>
         <p>Author: <em>{post.author}</em> </p>
@@ -50,17 +57,18 @@ class Post extends Component {
         </fieldset>
         </form>
 
-        <Comment />
+        {this.props.comments.map(comment => <Comment key={comment.id} comment={comment} />)}
 
       </div>
-    )
+    )}
   }
 }
 
-function mapStateToProps ({ posts }) {
-  // console.log('ownProps', ownProps.postId);
+function mapStateToProps ({ posts, comments }) {
   return {
-    posts: posts.posts
+    // console.log('ownProps', ownProps.postId);
+    posts: posts.posts,
+    comments: comments.comments
   }
 }
 
@@ -73,6 +81,7 @@ function mapDispatchToProps (dispatch, ownProps) {
     },
     upVote: (id) => dispatch(upVote(id)),
     downVote: (id) => dispatch(downVote(id)),
+    getComments: (id) => dispatch(fetchComments(id))
   }
 }
 
