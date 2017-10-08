@@ -11,6 +11,6 @@ import posts from './posts'
 // exporting both food and calendar
 export default combineReducers({
   categories,
-  // comments,
+  comments,
   posts,
 })
