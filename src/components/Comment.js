@@ -16,9 +16,22 @@ class Comment extends Component {
         <div className="list-group-item">
           <h4 className="list-group-item-heading">Name</h4>
           <p className="list-group-item-text">Comment body</p>
+
+          <p>
+            <textarea className="form-control" id="body" name="body"> </textarea>
+          </p>
+          <p>
+            <button className="btn btn-xs btn-success">Update</button>
+            <button className="btn btn-xs btn-danger">Cancel</button>
+          </p>
+
           <p className="list-group-item-text">Vote: <span>20 </span>
             <button className="btn btn-xs btn-success">Up</button>
             <button className="btn btn-xs btn-danger">Down</button>
+          </p>
+          <p>
+            <button className="btn btn-xs btn-danger">Delete</button>
+            <button className="btn btn-xs btn-info">Edit</button>
           </p>
         </div>
       </div>
