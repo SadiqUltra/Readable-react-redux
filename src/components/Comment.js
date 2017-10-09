@@ -40,8 +40,8 @@ class Comment extends Component {
           <br />
 
           <p className="list-group-item-text">Vote: <span>{comment.voteScore} </span>
-            <button className="btn btn-xs btn-success">Up</button>
-            <button className="btn btn-xs btn-danger">Down</button>
+            <button className="btn btn-xs btn-success" onClick={() => this.props.upVote(comment.id)}>Up</button>
+            <button className="btn btn-xs btn-danger" onClick={() => this.props.downVote(comment.id)}>Down</button>
           </p>
         </div>
       </div>
@@ -59,8 +59,8 @@ function mapStateToProps ({ }, ownProps) {
 function mapDispatchToProps (dispatch, ownProps) {
   return {
 
-    // upVote: (id) => dispatch(upVote(id)),
-    // downVote: (id) => dispatch(downVote(id)),
+    upVote: (id) => dispatch(upVote(id)),
+    downVote: (id) => dispatch(downVote(id)),
     deleteComment: (id) => dispatch(deleteComment(id)),
     updateComment: (comment) => dispatch(updateComment(comment)),
   }

@@ -2,7 +2,9 @@ import {
   RETRIEVE_COMMENT,
   ADD_COMMENT,
   DELETE_COMMENT,
-  UPDATE_COMMENT
+  UPDATE_COMMENT,
+  UP_VOTE_COMMENT,
+  DOWN_VOTE_COMMENT,
 } from '../actions/comments'
 
 const initalCommentState = {
@@ -31,6 +33,19 @@ function comments(state = initalCommentState, action){
       return {
         ...state,
         comments: state.comments.filter(comment => comment.id != action.id)
+      }
+
+    case UP_VOTE_COMMENT:
+      return {
+        ...state,
+        comments: state.comments.map( comment => comment.id === action.id ? action.comment : comment )
+
+      }
+    case DOWN_VOTE_COMMENT:
+      return {
+        ...state,
+        comments: state.comments.map( comment => comment.id === action.id ? action.comment : comment )
+
       }
 
     default:

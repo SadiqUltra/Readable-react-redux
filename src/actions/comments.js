@@ -5,8 +5,8 @@ export const RETRIEVE_COMMENT = 'RETRIEVE_COMMENT'
 export const ADD_COMMENT = 'ADD_COMMENT'
 export const DELETE_COMMENT = 'DELETE_COMMENT'
 export const UPDATE_COMMENT = 'UPDATE_COMMENT'
-export const UP_VOTE = 'UP_VOTE'
-export const DOWN_VOTE = 'DOWN_VOTE'
+export const UP_VOTE_COMMENT = 'UP_VOTE_COMMENT'
+export const DOWN_VOTE_COMMENT = 'DOWN_VOTE_COMMENT'
 
 // create new comment
 export function retrieveComments(json, postId){
@@ -46,7 +46,7 @@ export function doUpdateComment( comment ){
 // up vote
 export function doUpVote(json, id){
     return {
-      type: UP_VOTE,
+      type: UP_VOTE_COMMENT,
       id,
       comment: json
     }
@@ -56,7 +56,7 @@ export function doUpVote(json, id){
 // down vote
 export function doDownVote(json, id){
     return {
-      type: UP_VOTE,
+      type: DOWN_VOTE_COMMENT,
       id,
       comment: json
     }
@@ -104,13 +104,13 @@ export function updateComment(id, timestamp, details) {
 // up vote
 export function upVote(id) {
   return function (dispatch){
-    return API.votePost(id, true).then(json => dispatch(doUpVote(json, id)) )
+    return API.voteComment(id, true).then(json => dispatch(doUpVote(json, id)) )
   }
 }
 
 // down vote
 export function downVote(id) {
   return function (dispatch){
-    return API.votePost(id, false).then(json => dispatch(doDownVote(json, id)) )
+    return API.voteComment(id, false).then(json => dispatch(doDownVote(json, id)) )
   }
 }
