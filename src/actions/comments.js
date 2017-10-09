@@ -19,7 +19,8 @@ export function retrieveComments(json, postId){
 }
 
 // create new comment
-export function addComment({ comment }){
+export function doAddComment(comment){
+  console.log(comment);
   return {
     type: ADD_COMMENT,
     comment,
@@ -36,7 +37,7 @@ export function doDeleteComment( json, id ){
 }
 
 // update comment
-export function doUpdateComment({ comment }){
+export function doUpdateComment( comment ){
   return {
     type: UPDATE_COMMENT,
     comment,
@@ -69,6 +70,18 @@ export function fetchComments(postId) {
   return function (dispatch) {
 
     return API.fetchComments(postId).then(json => dispatch(retrieveComments(json, postId) ) )
+  }
+}
+
+// add comment
+export function createComment(comment, parentId) {
+  comment.id = uuidv1()
+  comment.timestamp = Date.now()
+  comment.parentId = parentId
+
+  return function (dispatch) {
+
+    return API.createComment(comment).then(json => dispatch(doAddComment(comment) ) )
   }
 }
 
