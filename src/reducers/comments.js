@@ -23,7 +23,8 @@ function comments(state = initalCommentState, action){
 
     case ADD_COMMENT:
       return {
-        ...state
+        ...state,
+        comments: state.comments.concat(action.comment)
       }
 
     default:
