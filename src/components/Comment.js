@@ -25,17 +25,18 @@ class Comment extends Component {
               <button className="btn btn-xs btn-danger" onClick={() => this.props.deleteComment(comment.id)}  >Delete</button>
               <button className="btn btn-xs btn-info" onClick={this.toggleEdit}>Edit</button>
             </div>
-            // TODO: add modal
-            <div>
-              <p>
-                <textarea className="form-control" id="body" name="body" defaultValue={comment.body} />
-              </p>
-              <p>
-                <button className="btn btn-xs btn-success">Update</button>
-                <button className="btn btn-xs btn-danger" onClick={this.toggleEdit}>Cancel</button>
-              </p>
-            </div>
-
+            {
+              // TODO: add modal
+              // <div>
+              //   <p>
+              //     <textarea className="form-control" id="body" name="body" defaultValue={comment.body} />
+              //   </p>
+              //   <p>
+              //     <button className="btn btn-xs btn-success">Update</button>
+              //     <button className="btn btn-xs btn-danger" onClick={this.toggleEdit}>Cancel</button>
+              //   </p>
+              // </div>
+            }
           <br />
 
           <p className="list-group-item-text">Vote: <span>{comment.voteScore} </span>
