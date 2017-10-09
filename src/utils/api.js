@@ -88,15 +88,14 @@ export const fetchCommentDetail = (commentId) =>{
     .then(data => data)
 }
 
-export const updateComment = (commentId, timestamp, detail) =>{
-  const requestBody = {'timestamp' : timestamp, 'body' : detail}
-  return fetch(`${api}/comments/${commentId}`, {
+export const updateComment = (comment) =>{
+  return fetch(`${api}/comments/${comment.id}`, {
     method: 'PUT',
     headers: {
       ...headers,
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify(requestBody)
+    body: JSON.stringify(comment)
   }).then(res => res.json())
 }
 
