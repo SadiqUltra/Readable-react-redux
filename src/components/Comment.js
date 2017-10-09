@@ -6,7 +6,7 @@ import Timestamp from 'react-timestamp'
 
 import history from './../utils/history'
 // add comments action
-import { deleteComment, upVote, downVote, updateComment } from './../actions/comments'
+import { deleteComment, upVote, downVote, editComment, updateComment } from './../actions/comments'
 
 class Comment extends Component {
 
@@ -18,25 +18,27 @@ class Comment extends Component {
         <div className="list-group-item">
           <h4 className="list-group-item-heading">{comment.author}</h4>
 
+            {( ! this.props.isEditComment &&
+              <div>
+                <p className="list-group-item-text">{comment.body}</p>
 
+                <button className="btn btn-xs btn-danger" onClick={() => this.props.deleteComment(comment.id)}  >Delete</button>
+                <button className="btn btn-xs btn-info" onClick={() => this.props.editComment(comment.id)}>Edit</button>
+              </div>
+            )}
+
+            {(  this.props.isEditComment &&
             <div>
-              <p className="list-group-item-text">{comment.body}</p>
-
-              <button className="btn btn-xs btn-danger" onClick={() => this.props.deleteComment(comment.id)}  >Delete</button>
-              <button className="btn btn-xs btn-info" onClick={this.toggleEdit}>Edit</button>
+              <p>
+                <textarea className="form-control" id="body" name="body" defaultValue={comment.body} />
+              </p>
+              <p>
+                <button className="btn btn-xs btn-success">Update</button>
+                <button className="btn btn-xs btn-danger" onClick={() => this.props.editComment(false)}>Cancel</button>
+              </p>
             </div>
-            {
-              // TODO: add modal
-              // <div>
-              //   <p>
-              //     <textarea className="form-control" id="body" name="body" defaultValue={comment.body} />
-              //   </p>
-              //   <p>
-              //     <button className="btn btn-xs btn-success">Update</button>
-              //     <button className="btn btn-xs btn-danger" onClick={this.toggleEdit}>Cancel</button>
-              //   </p>
-              // </div>
-            }
+          )}
+
           <br />
 
           <p className="list-group-item-text">Vote: <span>{comment.voteScore} </span>
@@ -50,9 +52,10 @@ class Comment extends Component {
 }
 
 
-function mapStateToProps ({ }, ownProps) {
+function mapStateToProps ({ comments }, ownProps) {
   return {
-    comment: ownProps.comment
+    comment: ownProps.comment,
+    isEditComment: comments.editCommentId === ownProps.comment.id
   }
 }
 
@@ -62,6 +65,7 @@ function mapDispatchToProps (dispatch, ownProps) {
     upVote: (id) => dispatch(upVote(id)),
     downVote: (id) => dispatch(downVote(id)),
     deleteComment: (id) => dispatch(deleteComment(id)),
+    editComment: (id) => dispatch(editComment(id)),
     updateComment: (comment) => dispatch(updateComment(comment)),
   }
 }

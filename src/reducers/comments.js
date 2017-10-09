@@ -4,11 +4,13 @@ import {
   DELETE_COMMENT,
   UPDATE_COMMENT,
   UP_VOTE_COMMENT,
+  EDIT_COMMENT,
   DOWN_VOTE_COMMENT,
 } from '../actions/comments'
 
 const initalCommentState = {
-  comments: []
+  comments: [],
+  editCommentId: false
 }
 
 function comments(state = initalCommentState, action){
@@ -46,6 +48,16 @@ function comments(state = initalCommentState, action){
         ...state,
         comments: state.comments.map( comment => comment.id === action.id ? action.comment : comment )
 
+      }
+    case EDIT_COMMENT:
+      return {
+        ...state,
+        editCommentId: action.id
+      }
+    case DELETE_COMMENT:
+      return {
+        ...state,
+        editCommentId: false
       }
 
     default:
