@@ -4,6 +4,7 @@ import { Redirect } from 'react-router'
 import { connect } from 'react-redux'
 import Timestamp from 'react-timestamp'
 import serializeForm from 'form-serialize'
+import sortBy from 'sort-by'
 
 import history from './../utils/history'
 import Comment from './Comment'
@@ -71,7 +72,7 @@ class Post extends Component {
         </fieldset>
         </form>
 
-        {this.props.comments.map(comment => <Comment key={comment.id} comment={comment} />)}
+        {this.props.comments.sort(sortBy('-timestamp')).map(comment => <Comment key={comment.id} comment={comment} />)}
 
       </div>
     )}
