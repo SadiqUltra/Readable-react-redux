@@ -25,7 +25,7 @@ class Comment extends Component {
               <button className="btn btn-xs btn-danger">Delete</button>
               <button className="btn btn-xs btn-info" onClick={this.toggleEdit}>Edit</button>
             </div>
-
+            // TODO: add modal
             <div>
               <p>
                 <textarea className="form-control" id="body" name="body" defaultValue={comment.body} />
