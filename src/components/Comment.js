@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Route, Link } from 'react-router-dom'
 import { Redirect } from 'react-router'
 import { connect } from 'react-redux'
+import serializeForm from 'form-serialize'
 import Timestamp from 'react-timestamp'
 
 import history from './../utils/history'
@@ -10,16 +11,22 @@ import { deleteComment, upVote, downVote, editComment, updateComment } from './.
 
 class Comment extends Component {
 
+  handleUpdateComment = (e) => {
+        e.preventDefault()
+        const comment = serializeForm(e.target, { hash: true })
+        this.props.updateComment(comment, this.props.postId)
+  }
   render(){
     const { comment } = this.props
 
     return(
       <div className="list-group">
         <div className="list-group-item">
-          <h4 className="list-group-item-heading">{comment.author}</h4>
 
             {( ! this.props.isEditComment &&
               <div>
+                <h4 className="list-group-item-heading">{comment.author}</h4>
+
                 <p className="list-group-item-text">{comment.body}</p>
 
                 <button className="btn btn-xs btn-danger" onClick={() => this.props.deleteComment(comment.id)}  >Delete</button>
@@ -28,15 +35,21 @@ class Comment extends Component {
             )}
 
             {(  this.props.isEditComment &&
-            <div>
+            <form onSubmit={this.handleUpdateComment}>
+              <input type="hidden" name='id' id='id' defaultValue={comment.id} />
+              <input type="hidden" name='timestamp' id='timestamp' defaultValue={comment.timestamp} />
+              <input type="hidden" name='parentId' id='parentId' defaultValue={comment.parentId} />
+              <p>
+                <input type="text" className="form-control input-md" id="author" defaultValue={comment.author} name="author"/>
+              </p>
               <p>
                 <textarea className="form-control" id="body" name="body" defaultValue={comment.body} />
               </p>
               <p>
-                <button className="btn btn-xs btn-success">Update</button>
+                <button id="submit" name="submit" className="btn btn-xs btn-success">Update</button>
                 <button className="btn btn-xs btn-danger" onClick={() => this.props.editComment(false)}>Cancel</button>
               </p>
-            </div>
+            </form>
           )}
 
           <br />

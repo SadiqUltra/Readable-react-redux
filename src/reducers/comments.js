@@ -2,9 +2,9 @@ import {
   RETRIEVE_COMMENT,
   ADD_COMMENT,
   DELETE_COMMENT,
-  UPDATE_COMMENT,
   UP_VOTE_COMMENT,
   EDIT_COMMENT,
+  UPDATE_COMMENT,
   DOWN_VOTE_COMMENT,
 } from '../actions/comments'
 
@@ -54,9 +54,10 @@ function comments(state = initalCommentState, action){
         ...state,
         editCommentId: action.id
       }
-    case DELETE_COMMENT:
+    case UPDATE_COMMENT:
       return {
         ...state,
+        comments: state.comments.map( comment => comment.id === action.comment.id ? action.comment : comment ),
         editCommentId: false
       }
 
