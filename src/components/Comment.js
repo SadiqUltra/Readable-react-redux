@@ -22,7 +22,7 @@ class Comment extends Component {
             <div>
               <p className="list-group-item-text">{comment.body}</p>
 
-              <button className="btn btn-xs btn-danger">Delete</button>
+              <button className="btn btn-xs btn-danger" onClick={() => this.props.deleteComment(comment.id)}  >Delete</button>
               <button className="btn btn-xs btn-info" onClick={this.toggleEdit}>Edit</button>
             </div>
             // TODO: add modal

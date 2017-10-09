@@ -27,6 +27,12 @@ function comments(state = initalCommentState, action){
         comments: state.comments.concat(action.comment)
       }
 
+    case DELETE_COMMENT:
+      return {
+        ...state,
+        comments: state.comments.filter(comment => comment.id != action.id)
+      }
+
     default:
       return state
   }
