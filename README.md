@@ -2,7 +2,7 @@
 
 ## Server side
 
-### Installation And Run
+### Install And Run
 
 ```ssh
   $ cd server
@@ -12,7 +12,7 @@
 
 ## Client side
 
-### Installation And Run
+### Install And Run
 ```ssh
 $ npm install
 $ npm start
