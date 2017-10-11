@@ -8,12 +8,13 @@ export const UPDATE_POST = 'UPDATE_POST'
 export const CHANGE_SORT = 'CHANGE_SORT'
 export const UP_VOTE = 'UP_VOTE'
 export const DOWN_VOTE = 'DOWN_VOTE'
+export const BIND_COMMENTS = 'BIND_COMMENTS'
 
 // get all posts
-function retrievePost(json) {
+function retrievePost(posts) {
   return {
     type: RETRIEVE_POST,
-    posts: json,
+    posts: posts,
   }
 }
 
@@ -121,4 +122,19 @@ export function updatePost(post) {
   return function (dispatch){
     return API.updatePost(post).then(json => dispatch(doUpdatePost(json)) )
   }
+}
+
+// bind comments
+
+export function bindComments(postId) {
+    console.log('bindComments', postId);
+    return function (dispatch){
+      return API.fetchComments(postId).then(comments => {
+        dispatch( {
+          type: BIND_COMMENTS,
+          comments,
+          postId
+        })
+      })
+    }
 }

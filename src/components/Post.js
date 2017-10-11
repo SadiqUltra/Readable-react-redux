@@ -46,7 +46,7 @@ class Post extends Component {
         <Link to={'/post/'+ post.category +'/'+ post.id +'/edit'} className='btn btn-xs btn-info'>Edit</Link>
         <button className="btn btn-xs btn-danger" onClick={() => this.props.deletePost(post.id)}>Delete</button>
 
-        <h2>Comments</h2>
+        <h2>Comments ({this.props.comments.length})</h2>
         Add a Comment
 
         <form onSubmit={this.handleSubmitComment} className="form-horizontal">

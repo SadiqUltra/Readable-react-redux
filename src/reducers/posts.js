@@ -5,13 +5,13 @@ import {
   UPDATE_POST,
   CHANGE_SORT,
   UP_VOTE,
+  BIND_COMMENTS,
   DOWN_VOTE,
 } from '../actions/posts'
 
 
 const initalPostState = {
   posts: [],
-  comments:[],
   sortBy: '-voteScore',
   // sortOrder: '-'
 }
@@ -65,6 +65,18 @@ function posts(state = initalPostState, action){
       return {
         ...state,
         posts: state.posts.map( post => post.id === action.id ? action.post : post )
+
+      }
+    case BIND_COMMENTS:
+      console.log('action.comments', action.comments)
+      return {
+        ...state,
+        posts: state.posts.map( post => {
+          if(post.id === action.postId){
+            post.comments = action.comments
+          }
+          return post
+        } )
 
       }
     default:

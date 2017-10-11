@@ -31,7 +31,7 @@ const logger = store => next => action => {
    )
  )
 
-store.dispatch(bootPosts())
+// store.dispatch(bootPosts())
 // store.dispatch(fetchComments('6ni6ok3ym7mf1p33lnez'))
 store.dispatch(bootCategories())
 
