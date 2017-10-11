@@ -1,13 +1,15 @@
 import * as API from './../utils/api'
 import uuidv1 from 'uuid'
 
-export const RETRIEVE_COMMENT = 'RETRIEVE_COMMENT'
-export const ADD_COMMENT = 'ADD_COMMENT'
-export const DELETE_COMMENT = 'DELETE_COMMENT'
-export const UPDATE_COMMENT = 'UPDATE_COMMENT'
-export const EDIT_COMMENT = 'EDIT_COMMENT'
-export const UP_VOTE_COMMENT = 'UP_VOTE_COMMENT'
-export const DOWN_VOTE_COMMENT = 'DOWN_VOTE_COMMENT'
+import {
+  RETRIEVE_COMMENT,
+  ADD_COMMENT,
+  DELETE_COMMENT,
+  UP_VOTE_COMMENT,
+  EDIT_COMMENT,
+  UPDATE_COMMENT,
+  DOWN_VOTE_COMMENT,
+} from '../constants'
 
 // create new comment
 export function retrieveComments(json, postId){

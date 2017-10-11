@@ -1,14 +1,16 @@
 import * as API from './../utils/api'
 import uuidv1 from 'uuid'
 
-export const RETRIEVE_POST = 'RETRIEVE_POST'
-export const ADD_POST = 'ADD_POST'
-export const DELETE_POST = 'DELETE_POST'
-export const UPDATE_POST = 'UPDATE_POST'
-export const CHANGE_SORT = 'CHANGE_SORT'
-export const UP_VOTE = 'UP_VOTE'
-export const DOWN_VOTE = 'DOWN_VOTE'
-export const BIND_COMMENTS = 'BIND_COMMENTS'
+import {
+  RETRIEVE_POST,
+  ADD_POST,
+  DELETE_POST,
+  UPDATE_POST,
+  CHANGE_SORT,
+  UP_VOTE,
+  BIND_COMMENTS,
+  DOWN_VOTE,
+} from '../constants'
 
 // get all posts
 function retrievePost(posts) {

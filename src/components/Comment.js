@@ -39,25 +39,25 @@ class Comment extends Component {
               <input type="hidden" name='id' id='id' defaultValue={comment.id} />
               <input type="hidden" name='timestamp' id='timestamp' defaultValue={comment.timestamp} />
               <input type="hidden" name='parentId' id='parentId' defaultValue={comment.parentId} />
-              <p>
+              <div>
                 <input type="text" className="form-control input-md" id="author" defaultValue={comment.author} name="author"/>
-              </p>
-              <p>
+              </div>
+              <div>
                 <textarea className="form-control" id="body" name="body" defaultValue={comment.body} />
-              </p>
-              <p>
+              </div>
+              <div>
                 <button id="submit" name="submit" className="btn btn-xs btn-success">Update</button>
                 <button className="btn btn-xs btn-danger" onClick={() => this.props.editComment(false)}>Cancel</button>
-              </p>
+              </div>
             </form>
           )}
 
           <br />
 
-          <p className="list-group-item-text">Vote: <span>{comment.voteScore} </span>
+          <div className="list-group-item-text">Vote: <span>{comment.voteScore} </span>
             <button className="btn btn-xs btn-success" onClick={() => this.props.upVote(comment.id)}>Up</button>
             <button className="btn btn-xs btn-danger" onClick={() => this.props.downVote(comment.id)}>Down</button>
-          </p>
+          </div>
         </div>
       </div>
     )

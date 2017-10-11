@@ -19,9 +19,9 @@ class Categories extends Component {
                 <h4>
                 {this.props.categories.map((category) => {
                   if(category.path === this.props.category)
-                    return <Link key={category.path} to={'/'+category.path} className='btn btn-sm btn-info'>{category.name}</Link>
+                    return <Link key={category.path} to={`/${category.path}`} className='btn btn-sm btn-info'>{category.name}</Link>
 
-                  return <Link key={category.path} to={'/'+category.path} className='btn btn-sm'>{category.name}</Link>
+                  return <Link key={category.path} to={`/${category.path}`} className='btn btn-sm'>{category.name}</Link>
                 })}
                 </h4>
               </td>

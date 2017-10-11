@@ -1,9 +1,11 @@
 import * as API from './../utils/api'
 
-export const RETRIEVE_CATEGORY = 'RETRIEVE_CATEGORY'
-export const ADD_CATEGORY = 'ADD_CATEGORY'
-export const DELETE_CATEGORY = 'DELETE_CATEGORY'
-export const UPDATE_CATEGORY = 'UPDATE_CATEGORY'
+import {
+  RETRIEVE_CATEGORY,
+  ADD_CATEGORY,
+  DELETE_CATEGORY,
+  UPDATE_CATEGORY
+} from '../constants'
 
 // get all posts
 function retrieveCategory(json) {

@@ -6,7 +6,7 @@ import {
   EDIT_COMMENT,
   UPDATE_COMMENT,
   DOWN_VOTE_COMMENT,
-} from '../actions/comments'
+} from '../constants'
 
 const initalCommentState = {
   comments: [],

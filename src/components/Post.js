@@ -43,7 +43,7 @@ class Post extends Component {
         </p>
         <hr/>
 
-        <Link to={'/post/'+ post.category +'/'+ post.id +'/edit'} className='btn btn-xs btn-info'>Edit</Link>
+        <Link to={`/post/${post.category}/${post.id}/edit`} className='btn btn-xs btn-info'>Edit</Link>
         <button className="btn btn-xs btn-danger" onClick={() => this.props.deletePost(post.id)}>Delete</button>
 
         <h2>Comments ({this.props.comments.length})</h2>

@@ -7,7 +7,7 @@ import {
   UP_VOTE,
   BIND_COMMENTS,
   DOWN_VOTE,
-} from '../actions/posts'
+} from '../constants'
 
 
 const initalPostState = {
